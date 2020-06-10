@@ -5,7 +5,7 @@ import axios from "axios";
 // ACTION TYPES;
 const FETCH_ALL_CAMPUSES = "FETCH_ALL_CAMPUSES";
 
-// - [ ] Write a `campuses` model with the following information:
+//   - [ ] Write a `campuses` model with the following information:
 //   - [ ] name - not empty or null
 //   - [ ] imageUrl - with a default value
 //   - [ ] address - not empty or null

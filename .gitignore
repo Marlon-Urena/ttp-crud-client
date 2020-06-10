@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/.idea/modules.xml
+/.idea/ttp-crud-client.iml
+/.idea/misc.xml
+/.idea/.gitignore
+/.idea/vcs.xml

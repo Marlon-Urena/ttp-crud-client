@@ -24,7 +24,6 @@ class AllCampusesContainer extends Component {
 // Map state to props;
 const mapState = (state) => {
   return {
-    hello: "hello world!!!",
     allCampuses: state.allCampuses,
   };
 };
