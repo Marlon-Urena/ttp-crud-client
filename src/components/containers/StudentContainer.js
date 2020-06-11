@@ -1,20 +1,15 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import { fetchStudentThunk } from "../../thunks";
 import { connect } from "react-redux";
-import { fetchAllStudentsThunk } from "../../thunks";
-import { AllStudentsView } from "../views";
+import { StudentView } from "../views";
 
-/**
- * Smart container
- * Are stateful components which keeps track of state
- * */
-class AllStudentsContainer extends Component {
+class StudentContainer extends Component {
   componentDidMount() {
-    this.props.fetchAllStudents();
+    this.props.fetchStudent(this.props.match.params.id);
   }
 
   render() {
-    return <AllStudentsView allStudents={this.props.allStudents} />;
+    return <StudentView student={this.props.student} />;
   }
 }
 
@@ -28,7 +23,7 @@ class AllStudentsContainer extends Component {
  * */
 const mapStateToProps = (state) => {
   return {
-    allStudents: state.allStudents,
+    Student: state.Student,
   };
 };
 
@@ -40,16 +35,8 @@ const mapStateToProps = (state) => {
  */
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
+    fetchStudent: (id) => dispatch(fetchStudentThunk(id)),
   };
 };
 
-AllStudentsContainer.propTypes = {
-  allStudents: PropTypes.array.isRequired,
-  fetchAllStudents: PropTypes.func.isRequired,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AllStudentsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(StudentContainer);
