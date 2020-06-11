@@ -1,3 +1,16 @@
 .all-campuses {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
   color: tomato;
+  padding: 10px;
+}
+
+.campus-card-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.campus-card {
+  max-width: 400px;
 }

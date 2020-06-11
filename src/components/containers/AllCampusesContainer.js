@@ -10,13 +10,20 @@ class AllCampusesContainer extends Component {
     console.log(this.props);
     this.props.fetchAllCampuses();
   }
-
+  //TODO: Apply grid structure for cards.
   render() {
     return (
-      <AllCampusesView
-        allCampuses={this.props.allCampuses}
-        hello={this.props.hello}
-      />
+      <>
+        <div className="jumbotron jumbotron-fluid">
+          <div className="container">
+            <h1 className="display-4">All Campuses</h1>
+          </div>
+        </div>
+        <AllCampusesView
+          allCampuses={this.props.allCampuses}
+          hello={this.props.hello}
+        />
+      </>
     );
   }
 }
