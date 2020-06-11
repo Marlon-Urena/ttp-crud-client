@@ -23,7 +23,7 @@ class StudentContainer extends Component {
  * */
 const mapStateToProps = (state) => {
   return {
-    Student: state.Student,
+    student: state.student,
   };
 };
 
