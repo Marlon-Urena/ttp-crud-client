@@ -86,11 +86,12 @@ const fetchAllCampuses = (campuses) => {
 
 // THUNK CREATORS;
 export const fetchAllCampusesThunk = () => (dispatch) => {
-  return axios
-    .get("/api/campuses")
-    .then((res) => res.data)
-    .then((campuses) => dispatch(fetchAllCampuses(campuses)))
-    .catch((err) => console.log(err));
+  // return axios
+  //   .get("/api/campuses")
+  //   .then((res) => res.data)
+  //   .then((campuses) => dispatch(fetchAllCampuses(campuses)))
+  //   .catch((err) => console.log(err));
+  return dispatch(fetchAllCampuses(allCampuses));
 };
 
 // REDUCER;
