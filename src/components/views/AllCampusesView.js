@@ -9,7 +9,6 @@ const AllCampusesView = (props) => {
     return <div className="all-campuses">There are no campuses</div>;
   }
 
-  //TODO: Create a link to delete campuses
   return (
     <>
       <div className="jumbotron jumbotron-fluid">
@@ -40,13 +39,13 @@ const AllCampusesView = (props) => {
                   </Link>
                   <p className="card-text">{campus.description}</p>
                   <div className="campus-card-links">
-                    <Link to={`/campuses/edit/${campus.id}`}>
+                    <Link to={`/campuses/${campus.id}/edit/`}>
                       <p className="card-link">Edit</p>
                     </Link>
                     <button
                       type="button"
                       className="btn btn-danger"
-                      onClick={null}
+                      onClick={() => props.handleDelete(campus.id)}
                     >
                       Remove
                     </button>
