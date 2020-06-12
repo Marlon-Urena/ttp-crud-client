@@ -1,4 +1,5 @@
 import React from "react";
+import ComboBox from "./ComboBox";
 //TODO: Pass in GPA information
 const StudentView = (props) => {
   return (
@@ -23,28 +24,8 @@ const StudentView = (props) => {
       </div>
       <div className="campus-section">
         <div className="campus-dropdown-button">
-          <div className="btn-group">
-            <button
-              className="btn btn-secondary btn-lg dropdown-toggle"
-              type="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Large button
-            </button>
-            <div className="dropdown-menu">
-              <button className="dropdown-item" type="button">
-                Campus 1
-              </button>
-              <button className="dropdown-item" type="button">
-                Campus 2
-              </button>
-              <button className="dropdown-item" type="button">
-                Campus 3
-              </button>
-            </div>
-          </div>
+          <ComboBox />
+          <div className="btn-group"></div>
         </div>
         <button className="campus-button btn btn-primary">Change Campus</button>
       </div>
