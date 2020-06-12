@@ -14,11 +14,6 @@ class AllCampusesContainer extends Component {
   render() {
     return (
       <>
-        <div className="jumbotron jumbotron-fluid">
-          <div className="container">
-            <h1 className="display-4">All Campuses</h1>
-          </div>
-        </div>
         <AllCampusesView
           allCampuses={this.props.allCampuses}
           hello={this.props.hello}

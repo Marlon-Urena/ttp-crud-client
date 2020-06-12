@@ -1,22 +1,12 @@
 import React from "react";
-
-/**
- * 
- const campus = {
-  id: "3434454",
-  name: "Brooklyn College",
-  address: "Brooklyn",
-  imageUrl: "",
-  description: "A college in Brooklyn",
-};
- */
+import "./styles/CampusView.css";
 
 const CampusView = (props) => {
   return (
     <>
       <div className="campus-heading">
         <div className="campus-img">
-          <img src="https://via.placeholder.com/150" alt="picture of campus" />
+          <img src="https://via.placeholder.com/150" alt="campus" />
         </div>
         <div className="campus-information">
           <h1 className="campus-name">{props.campus.name}</h1>
