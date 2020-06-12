@@ -3,6 +3,7 @@ import axios from "axios";
 // ACTION TYPES;
 const FETCH_ALL_CAMPUSES = "FETCH_ALL_CAMPUSES";
 const ADD_CAMPUS = "ADD_CAMPUS";
+const EDIT_CAMPUS = "EDIT_CAMPUS";
 
 //   - [ ] Write a `campuses` model with the following information:
 //   - [ ] name - not empty or null
@@ -25,6 +26,13 @@ const addCampus = (campus) => {
   };
 };
 
+const editCampus = (campus) => {
+  return {
+    type: EDIT_CAMPUS,
+    payload: campus,
+  };
+};
+
 // THUNK CREATORS;
 export const fetchAllCampusesThunk = () => (dispatch) => {
   return axios
@@ -42,12 +50,22 @@ export const addCampusThunk = (campus) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
+export const editCampusThunk = (id, campus) => (dispatch) => {
+  return axios
+    .put(`/api/campuses/${id}`, campus)
+    .then((res) => res.data)
+    .then((updatedCampus) => dispatch(editCampus(updatedCampus)))
+    .catch((err) => console.log(err));
+};
+
 // REDUCER;
 const reducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_ALL_CAMPUSES:
       return action.payload;
     case ADD_CAMPUS:
+      return [...state, action.payload];
+    case EDIT_CAMPUS:
       return [...state, action.payload];
     default:
       return state;
