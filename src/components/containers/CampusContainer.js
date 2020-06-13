@@ -20,6 +20,7 @@ class CampusContainer extends Component {
 
 // map state to props
 const mapState = (state) => {
+  console.log(state);
   return {
     campus: state.campus,
   };
