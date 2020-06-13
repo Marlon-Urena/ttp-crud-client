@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "@material-ui/core";
 import "./styles/CampusView.css";
 
 const CampusView = (props) => {
@@ -16,12 +17,16 @@ const CampusView = (props) => {
       <div>
         <p className="campus-address">{props.campus.address}</p>
         <div>
-          <button type="button" className="btn btn-success">
+          <Button variant="contained" color="primary">
             Edit
-          </button>
-          <button type="button" className="btn btn-danger">
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => props.handleDelete(props.campus.id)}
+          >
             Delete
-          </button>
+          </Button>
         </div>
       </div>
     </>
