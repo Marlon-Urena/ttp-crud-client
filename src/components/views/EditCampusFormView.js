@@ -12,7 +12,7 @@ const EditCampusFormView = (props) => {
   console.log(props);
   const students = () => {
     if (!props.students.length) {
-      return <div className="all-campuses">There are no campuses</div>;
+      return <div>There are no campuses</div>;
     } else {
       return (
         <div className="campus-students">
