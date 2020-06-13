@@ -6,6 +6,7 @@ import { EditCampusFormView } from "../views";
 
 class EditCampusFormContainer extends Component {
   constructor(props) {
+    console.log("Constructor");
     super(props);
     this.state = {
       name: "",
@@ -19,7 +20,9 @@ class EditCampusFormContainer extends Component {
     this.props.fetchCampus(this.props.match.params.id).then(({ payload }) => {
       this.setState(payload);
     });
+    console.log("fetch finally");
   }
+
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -48,7 +51,6 @@ class EditCampusFormContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     campus: state.campus,
   };

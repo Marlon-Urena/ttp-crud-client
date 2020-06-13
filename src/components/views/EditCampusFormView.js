@@ -5,6 +5,49 @@ import ComboBox from "./ComboBox";
 import { Link } from "react-router-dom";
 
 const EditCampusFormView = (props) => {
+  console.log(props);
+  const students = () => {
+    if (!props.students.length) {
+      return <div className="all-campuses">There are no campuses</div>;
+    } else {
+      return (
+        <div className="campus-students">
+          {props.students.map((student) => (
+            <div key={student.id} className="card mb-3 campus-card">
+              <div className="row no-gutters">
+                <div className="col-md-4">
+                  <img
+                    src="https://via.placeholder.com/150"
+                    className="card-img"
+                    alt="student"
+                  />
+                </div>
+                <div className="col-md-8">
+                  <div className="card-body">
+                    <Link to={`/students/${student.id}`}>
+                      <h5 className="card-title">{student.firstName}</h5>
+                    </Link>
+                    <p className="card-text">GPA: </p>
+                    <div className="campus-card-links">
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={null}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+          ;
+        </div>
+      );
+    }
+  };
+
   return (
     <>
       <form onSubmit={props.handleSubmit}>
@@ -52,6 +95,7 @@ const EditCampusFormView = (props) => {
             Add to Campus
           </Button>
         </div>
+        {students()}
       </div>
     </>
   );
