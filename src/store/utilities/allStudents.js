@@ -27,6 +27,20 @@ const addStudent = (student) => {
   };
 };
 
+const editStudent = (student) => {
+  return {
+    type: EDIT_STUDENT,
+    payload: student,
+  };
+};
+
+const deleteStudent = (id) => {
+  return {
+    type: DELETE_STUDENT,
+    payload: id,
+  };
+};
+
 /**
  * THUNK CREATORS
  * Purpose: Functions that require external resources are done here.

@@ -70,7 +70,6 @@ export const addCampusThunk = (campus, ownProps) => (dispatch) => {
 };
 
 export const editCampusThunk = (id, campus) => (dispatch) => {
-  console.log("edit thunk ran");
   return axios
     .put(`/api/campuses/${id}`, campus)
     .then((res) => res.data)
