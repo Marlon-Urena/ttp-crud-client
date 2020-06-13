@@ -5,6 +5,7 @@ import axios from "axios";
  * Purpose: Gets used by the reducer to run a payload
  */
 const FETCH_ALL_STUDENTS = "FETCH_ALL_STUDENTS";
+const ADD_STUDENT = "ADD_STUDENT";
 
 /**
  * DUMMY DATA
@@ -22,6 +23,13 @@ const fetchAllStudents = (students) => {
   };
 };
 
+const addStudent = (student) => {
+  return {
+    type: ADD_STUDENT,
+    payload: student,
+  };
+};
+
 /**
  * THUNK CREATORS
  * Purpose: Functions that require external resources are done here.
@@ -35,6 +43,13 @@ export const fetchAllStudentsThunk = () => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
+export const addStudentThunk = (student) => (dispatch) => {
+  axios
+    .post(`/api/students/`, student)
+    .then((res) => res.data)
+    .then((newStudent) => addStudent(newStudent));
+};
+
 /**
  * REDUCER
  * Purpose: Take the action and matches with appropriate type and returns.
@@ -44,6 +59,8 @@ const reducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_ALL_STUDENTS:
       return action.payload;
+    case ADD_STUDENT:
+      return [...state, action.payload];
     default:
       return state;
   }
