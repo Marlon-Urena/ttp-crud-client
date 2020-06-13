@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchStudentThunk } from "../../thunks";
+import { deleteStudentThunk, fetchStudentThunk } from "../../thunks";
 import { connect } from "react-redux";
 import { StudentView } from "../views";
 
@@ -8,8 +8,17 @@ class StudentContainer extends Component {
     this.props.fetchStudent(this.props.match.params.id);
   }
 
+  handleDelete = (id) => {
+    this.props.deleteStudent(id);
+  };
+
   render() {
-    return <StudentView student={this.props.student} />;
+    return (
+      <StudentView
+        handleDelete={this.handleDelete}
+        student={this.props.student}
+      />
+    );
   }
 }
 
@@ -36,6 +45,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchStudent: (id) => dispatch(fetchStudentThunk(id)),
+    deleteStudent: (id) => dispatch(deleteStudentThunk(id)),
   };
 };
 

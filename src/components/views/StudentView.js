@@ -1,5 +1,7 @@
 import React from "react";
 import ComboBox from "./ComboBox";
+import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
 //TODO: Pass in GPA information
 const StudentView = (props) => {
   return (
@@ -16,12 +18,21 @@ const StudentView = (props) => {
           <p className="student-gpa">GPA: {props.student.gpa}</p>
         </div>
         <div className="alter-button">
-          <button type="button" className="btn btn-success">
+          <Button
+            component={Link}
+            to={`/students/${props.student.id}/edit`}
+            variant="contained"
+            color="primary"
+          >
             Edit
-          </button>
-          <button type="button" className="btn btn-danger">
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => props.handleDelete(props.student.id)}
+          >
             Delete
-          </button>
+          </Button>
         </div>
       </div>
       <div className="campus-section">
@@ -29,7 +40,9 @@ const StudentView = (props) => {
           <ComboBox />
           <div className="btn-group"></div>
         </div>
-        <button className="campus-button btn btn-primary">Change Campus</button>
+        <Button className="campus-button" variant="contained" color="primary">
+          Change Campus
+        </Button>
       </div>
     </>
   );
