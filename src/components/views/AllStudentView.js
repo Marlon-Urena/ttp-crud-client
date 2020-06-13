@@ -45,9 +45,13 @@ const AllStudentsView = (props) => {
               </CardActionArea>
             </Link>
             <CardActions>
-              <Link to={`campuses/${student.campus.id}`}>
-                <p className="campus-link">{student.campus.name}</p>
-              </Link>
+              {student.campus ? (
+                <Link to={`campuses/${student.campus.id}`}>
+                  <p className="campus-link">{student.campus.name}</p>
+                </Link>
+              ) : (
+                <p>No Campus</p>
+              )}
             </CardActions>
           </Card>
         </Grid>
