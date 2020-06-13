@@ -20,9 +20,7 @@ class AllStudentsContainer extends Component {
 
 /**
  * Map state to props.
- *
  * Optional Param: ownProps (if comp needs its own props to get data from the store).
- *
  * Return: New store state in the form of an object. Each field becomes prop in
  * component. Subscribes to store changes only if a difference is present between props and store.
  * */

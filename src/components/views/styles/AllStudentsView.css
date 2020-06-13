@@ -1,0 +1,11 @@
+.student-card {
+    max-width: 345px;
+}
+.student-media {
+    height: 140px;
+}
+
+.student-link:hover {
+    text-decoration: none;
+    decoration: none;
+}
