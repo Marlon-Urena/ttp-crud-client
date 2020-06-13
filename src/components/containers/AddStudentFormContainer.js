@@ -10,7 +10,7 @@ class AddStudentFormContainer extends Component {
     this.state = {
       firstName: "",
       lastName: "",
-      gpa: 0.0,
+      gpa: "",
       email: "",
       imageUrl: "",
     };
@@ -42,10 +42,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 };
 AddStudentFormContainer.propTypes = {
   addStudent: PropTypes.func.isRequired,
-  firstName: PropTypes.string.isRequired,
-  lastName: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  gpa: PropTypes.number,
-  imageUrl: PropTypes.string,
 };
 export default connect(null, mapDispatchToProps)(AddStudentFormContainer);

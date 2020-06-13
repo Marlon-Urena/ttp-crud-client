@@ -23,7 +23,7 @@ const fetchStudent = (student) => {
  * Called in StudentsContainer and passed into dispatch
  */
 export const fetchStudentThunk = (id) => (dispatch) => {
-  axios
+  return axios
     .get(`/api/students/${id}`)
     .then((res) => res.data)
     .then((student) => dispatch(fetchStudent(student)))
