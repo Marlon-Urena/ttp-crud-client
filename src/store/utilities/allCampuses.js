@@ -64,7 +64,7 @@ export const addCampusThunk = (campus, ownProps) => (dispatch) => {
     .then((res) => res.data)
     .then((newCampus) => {
       dispatch(addCampus(newCampus));
-      ownProps.history.push(`/students/${newCampus.id}`);
+      ownProps.history.push(`/campuses/${newCampus.id}`);
     })
     .catch((err) => console.log(err));
 };
@@ -77,11 +77,14 @@ export const editCampusThunk = (id, campus) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export const deleteCampusThunk = (id) => (dispatch) => {
+export const deleteCampusThunk = (id, ownProps) => (dispatch) => {
   return axios
     .delete(`/api/campuses/${id}`)
     .then((res) => res.data)
-    .then(() => dispatch(deleteCampus(id)))
+    .then(() => {
+      dispatch(deleteCampus(id));
+      ownProps.history.push(`/campuses`);
+    })
     .catch((err) => console.log(err));
 };
 
