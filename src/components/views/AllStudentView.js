@@ -8,7 +8,6 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  Button,
   Typography,
   Grid,
 } from "@material-ui/core";
@@ -22,37 +21,35 @@ const AllStudentsView = (props) => {
   return (
     <Grid container spacing={3} className="all-students">
       {props.allStudents.map((student) => (
-        <Grid item sm={3}>
-          <div key={student.id}>
-            <Card className="student-card">
-              <Link to={`students/${student.id}`}>
-                <CardActionArea className={"student-link"}>
-                  <CardMedia
-                    className="student-media"
-                    image={student.imageUrl}
-                    title={student.firstName + " " + student.lastName}
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {student.firstName + " " + student.lastName}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      GPA: {student.gpa}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
+        <Grid key={student.id} item sm={3}>
+          <Card className="student-card">
+            <Link to={`students/${student.id}`}>
+              <CardActionArea className={"student-link"}>
+                <CardMedia
+                  className="student-media"
+                  image={student.imageUrl}
+                  title={student.firstName + " " + student.lastName}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    {student.firstName + " " + student.lastName}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    GPA: {student.gpa}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Link>
+            <CardActions>
+              <Link to={`campuses/${student.campus.id}`}>
+                <p className="campus-link">{student.campus.name}</p>
               </Link>
-              <CardActions>
-                <Link to={`campuses/${student.campus.id}`}>
-                  <p className="campus-link">{student.campus.name}</p>
-                </Link>
-              </CardActions>
-            </Card>
-          </div>
+            </CardActions>
+          </Card>
         </Grid>
       ))}
     </Grid>

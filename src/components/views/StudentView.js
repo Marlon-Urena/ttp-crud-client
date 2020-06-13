@@ -6,12 +6,14 @@ const StudentView = (props) => {
     <>
       <div className="student-heading">
         <div className="student-img">
-          <img src={props.student.imageURL} alt="student" />
+          <img src={props.student.imageUrl} alt="student" />
         </div>
         <div className="student-information">
-          <h1 className="student-name">{props.student.name}</h1>
+          <h1 className="student-name">
+            {props.student.firstName + " " + props.student.lastName}
+          </h1>
           <p className="student-description">{props.student.email}</p>
-          <p className="student-gpa">GPA: </p>
+          <p className="student-gpa">GPA: {props.student.gpa}</p>
         </div>
         <div className="alter-button">
           <button type="button" className="btn btn-success">
