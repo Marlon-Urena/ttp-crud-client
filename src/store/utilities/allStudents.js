@@ -8,11 +8,6 @@ const FETCH_ALL_STUDENTS = "FETCH_ALL_STUDENTS";
 const ADD_STUDENT = "ADD_STUDENT";
 
 /**
- * DUMMY DATA
- * Purpose: Used for mocking thunk
- */
-
-/**
  * ACTION CREATORS
  * Purpose: Functions that send an action to the reducer.
  */
@@ -43,11 +38,15 @@ export const fetchAllStudentsThunk = () => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export const addStudentThunk = (student) => (dispatch) => {
+export const addStudentThunk = (student, ownProps) => (dispatch) => {
   axios
     .post(`/api/students/`, student)
     .then((res) => res.data)
-    .then((newStudent) => addStudent(newStudent));
+    .then((newStudent) => {
+      dispatch(addStudent(newStudent));
+      ownProps.history.push(`/students/${newStudent.id}`);
+    })
+    .catch((err) => console.log(err));
 };
 
 /**
