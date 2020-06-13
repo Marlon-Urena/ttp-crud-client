@@ -4,6 +4,10 @@ import Button from "@material-ui/core/Button";
 import ComboBox from "./ComboBox";
 import { Link } from "react-router-dom";
 
+//TODO: Connect removeStudentCampus action to remove button
+//TODO: Look into possibly getting a list of all students passed in here. Those that are on campus gets put into cards.
+//TODO: Link Add to campus button with the dropdown box
+
 const EditCampusFormView = (props) => {
   console.log(props);
   const students = () => {
@@ -28,7 +32,7 @@ const EditCampusFormView = (props) => {
                       <h5 className="card-title">{student.firstName}</h5>
                     </Link>
                     <p className="card-text">GPA: </p>
-                    <div className="campus-card-links">
+                    <div className="student-card-links">
                       <button
                         type="button"
                         className="btn btn-danger"
