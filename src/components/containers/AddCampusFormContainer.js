@@ -25,6 +25,7 @@ class AddCampusFormContainer extends Component {
     e.preventDefault();
     this.props.addCampus(this.state);
   };
+
   render() {
     return (
       <AddCampusFormView
