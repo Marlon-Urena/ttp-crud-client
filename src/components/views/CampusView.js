@@ -52,7 +52,12 @@ const CampusView = (props) => {
       <div>
         <p className="campus-address">{props.campus.address}</p>
         <div>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            component={Link}
+            to={`/campuses/${props.campus.id}/edit`}
+          >
             Edit
           </Button>
           <Button
