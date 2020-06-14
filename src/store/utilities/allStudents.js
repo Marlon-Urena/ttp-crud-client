@@ -47,7 +47,7 @@ const deleteStudent = (id) => {
  * Called in AllStudentsContainer and passed into dispatch
  */
 export const fetchAllStudentsThunk = () => (dispatch) => {
-  axios
+  return axios
     .get(`/api/students/`)
     .then((res) => res.data)
     .then((students) => dispatch(fetchAllStudents(students)))
@@ -55,7 +55,7 @@ export const fetchAllStudentsThunk = () => (dispatch) => {
 };
 
 export const addStudentThunk = (student, ownProps) => (dispatch) => {
-  axios
+  return axios
     .post(`/api/students/`, student)
     .then((res) => res.data)
     .then((newStudent) => {

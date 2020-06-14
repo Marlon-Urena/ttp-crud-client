@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 
 const CampusView = (props) => {
   const students = () => {
-    if (!props.students.length) {
+    if (!props.campus.students.length) {
       return <div>There are no students</div>;
     } else {
       return (
         <div className="campus-students">
-          {props.students.map((student) => (
+          {props.campus.students.map((student) => (
             <div key={student.id} className="card mb-3 campus-card">
               <div className="row no-gutters">
                 <div className="col-md-4">
@@ -28,15 +28,6 @@ const CampusView = (props) => {
                       </h5>
                     </Link>
                     <p className="card-text">GPA: {student.gpa}</p>
-                    <div className="student-card-links">
-                      <button
-                        type="button"
-                        className="btn btn-danger"
-                        onClick={null}
-                      >
-                        Remove
-                      </button>
-                    </div>
                   </div>
                 </div>
               </div>

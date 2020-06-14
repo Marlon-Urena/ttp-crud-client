@@ -84,6 +84,7 @@ export const deleteCampusThunk = (id, ownProps) => (dispatch) => {
     .then(() => {
       dispatch(deleteCampus(id));
       ownProps.history.push(`/campuses`);
+      console.log("Pushing history");
     })
     .catch((err) => console.log(err));
 };
@@ -106,7 +107,6 @@ const reducer = (state = [], action) => {
     case EDIT_CAMPUS:
       return [...state, action.payload];
     case DELETE_CAMPUS:
-      console.log(action.payload);
       return state.filter((campus) => campus.id !== action.payload);
     case FETCH_CAMPUS_STUDENTS:
       return action.payload;

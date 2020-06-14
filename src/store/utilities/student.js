@@ -34,7 +34,7 @@ export const fetchStudentThunk = (id) => (dispatch) => {
  * Purpose: Take the action and matches with appropriate type and returns.
  * Extra Info: Used by the store in store/index.js
  */
-const reducer = (state = [], action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_STUDENT:
       return action.payload;
