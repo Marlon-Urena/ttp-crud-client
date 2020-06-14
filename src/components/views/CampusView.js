@@ -1,48 +1,25 @@
 import React from "react";
-import { Button } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import "./styles/CampusView.css";
 import { Link } from "react-router-dom";
+import { StudentCardContainer } from "../containers";
 
 const CampusView = (props) => {
-  const students = () => {
-    if (!props.campus.students.length) {
-      return <div>There are no students</div>;
-    } else {
+  const students = () =>
+    props.campus.students.map((student) => {
       return (
-        <div className="campus-students">
-          {props.campus.students.map((student) => (
-            <div key={student.id} className="card mb-3 campus-card">
-              <div className="row no-gutters">
-                <div className="col-md-4">
-                  <img
-                    src={student.imageUrl}
-                    className="card-img"
-                    alt="student"
-                  />
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body">
-                    <Link to={`/students/${student.id}`}>
-                      <h5 className="card-title">
-                        {student.firstName + " " + student.lastName}
-                      </h5>
-                    </Link>
-                    <p className="card-text">GPA: {student.gpa}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-          ;
-        </div>
+        <StudentCardContainer
+          key={student.id}
+          student={student}
+          campus={props.campus}
+        />
       );
-    }
-  };
+    });
   return (
     <>
       <div className="campus-heading">
         <div className="campus-img">
-          <img src="https://via.placeholder.com/150" alt="campus" />
+          <img src={props.campus.imageUrl} alt="campus" />
         </div>
         <div className="campus-information">
           <h1 className="campus-name">{props.campus.name}</h1>
@@ -69,7 +46,13 @@ const CampusView = (props) => {
           </Button>
         </div>
       </div>
-      {students()}
+      <Grid container spacing={3} className="all-students">
+        {props.campus.students.length ? (
+          students()
+        ) : (
+          <h3>There are no students currently registered to this campus.</h3>
+        )}
+      </Grid>
     </>
   );
 };
