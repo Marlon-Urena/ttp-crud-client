@@ -73,11 +73,14 @@ export const editStudentThunk = (id, student) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export const deleteStudentThunk = (id) => (dispatch) => {
+export const deleteStudentThunk = (id, ownProps) => (dispatch) => {
   return axios
-    .delete(`/api/student/${id}`)
+    .delete(`/api/students/${id}`)
     .then((res) => res.data)
-    .then(() => dispatch(deleteStudent(id)))
+    .then(() => {
+      dispatch(deleteStudent(id));
+      ownProps.history.push(`/students`);
+    })
     .catch((err) => console.log(err));
 };
 

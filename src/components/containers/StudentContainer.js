@@ -42,10 +42,10 @@ const mapStateToProps = (state) => {
  * Runs when new props are loaded into component.
  * Return: Dispatches an action and returns the changes as an object to props.
  */
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetchStudent: (id) => dispatch(fetchStudentThunk(id)),
-    deleteStudent: (id) => dispatch(deleteStudentThunk(id)),
+    deleteStudent: (id) => dispatch(deleteStudentThunk(id, ownProps)),
   };
 };
 
