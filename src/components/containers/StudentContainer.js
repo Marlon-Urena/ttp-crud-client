@@ -27,7 +27,7 @@ class StudentContainer extends Component {
   handleChange = (e, campus) => {
     console.log(campus);
     this.setState((prevState) => ({
-      student: { ...prevState.student, campusId_FK: campus.id },
+      student: { ...prevState.student, campusId_FK: parseInt(campus.id, 10) },
     }));
   };
 
@@ -41,7 +41,6 @@ class StudentContainer extends Component {
   };
 
   render() {
-    console.log(this.props);
     return this.state.loading ? (
       <></>
     ) : (

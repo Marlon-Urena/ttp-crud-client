@@ -51,10 +51,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetchStudent: (id) => dispatch(fetchStudentThunk(id)),
-    editStudent: (id, student) => dispatch(editStudentThunk(id, student)),
+    editStudent: (id, student) =>
+      dispatch(editStudentThunk(id, student, ownProps)),
   };
 };
 
