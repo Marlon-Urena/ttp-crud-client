@@ -18,7 +18,11 @@ class CampusContainer extends Component {
 
   render() {
     return (
-      <CampusView handleDelete={this.handleDelete} campus={this.props.campus} />
+      <CampusView
+        handleDelete={this.handleDelete}
+        students={this.props.campus.students}
+        campus={this.props.campus}
+      />
     );
   }
 }
