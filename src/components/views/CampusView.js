@@ -68,5 +68,4 @@ const CampusView = (props) => {
     </>
   );
 };
-//TODO: Make sure to add students that are tied to campus
 export default CampusView;
