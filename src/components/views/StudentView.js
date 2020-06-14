@@ -4,6 +4,37 @@ import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 //TODO: Pass in GPA information
 const StudentView = (props) => {
+  const campus = () => {
+    const currentCampus = props.student.campus;
+    if (!currentCampus) {
+      console.log(currentCampus);
+      return <div>This student is not registered to a campus.</div>;
+    } else {
+      return (
+        <div className="campuses">
+          <div key={currentCampus.id} className="card mb-3 campus-card">
+            <div className="row no-gutters">
+              <div className="col-md-4">
+                <img
+                  src={currentCampus.imageUrl}
+                  className="card-img"
+                  alt="campus"
+                />
+              </div>
+              <div className="col-md-8">
+                <div className="card-body">
+                  <Link to={`/campuses/${currentCampus.id}`}>
+                    <h5 className="card-title">{currentCampus.name}</h5>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+          ;
+        </div>
+      );
+    }
+  };
   return (
     <>
       <div className="student-heading">
@@ -36,14 +67,25 @@ const StudentView = (props) => {
         </div>
       </div>
       <div className="campus-section">
-        <div className="campus-dropdown-button">
-          <ComboBoxView group={props.campuses} />
-          <div className="btn-group"></div>
-        </div>
-        <Button className="campus-button" variant="contained" color="primary">
-          Change Campus
-        </Button>
+        <form onSubmit={props.handleSubmit}>
+          <div className="campus-dropdown-button">
+            <ComboBoxView
+              group={props.campuses}
+              handleChange={props.handleChange}
+            />
+            <div className="btn-group"></div>
+          </div>
+          <Button
+            className="campus-button"
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            Change Campus
+          </Button>
+        </form>
       </div>
+      {campus()}
     </>
   );
 };

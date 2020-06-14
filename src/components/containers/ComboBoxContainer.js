@@ -11,7 +11,12 @@ class ComboBoxContainer extends Component {
   // }
 
   render() {
-    return <ComboBoxView group={this.props.group} />;
+    return (
+      <ComboBoxView
+        group={this.props.group}
+        handleChange={this.props.handleChange}
+      />
+    );
   }
 }
 // const mapStateToProps = (state) => {

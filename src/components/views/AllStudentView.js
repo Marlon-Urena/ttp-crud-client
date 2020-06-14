@@ -49,7 +49,7 @@ const AllStudentsView = (props) => {
         {props.allStudents.map((student) => (
           <Grid key={student.id} item sm={3}>
             <Card className="student-card">
-              <Link to={`students/${student.id}`}>
+              <Link to={`/students/${student.id}`}>
                 <CardActionArea className={"student-link"}>
                   <CardMedia
                     className="student-media"

@@ -10,6 +10,7 @@ const ComboBoxView = (props) => {
       getOptionLabel={(option) => option.name}
       style={{ width: 200 }}
       size="small"
+      onChange={props.handleChange}
       renderInput={(params) => (
         <TextField {...params} label="Select" variant="outlined" />
       )}
