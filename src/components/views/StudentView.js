@@ -1,8 +1,9 @@
 import React from "react";
-import ComboBoxView from "./ComboBoxView";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
-//TODO: Pass in GPA information
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+
 const StudentView = (props) => {
   const campus = () => {
     const currentCampus = props.student.campus;
@@ -68,13 +69,19 @@ const StudentView = (props) => {
       </div>
       <div className="campus-section">
         <form onSubmit={props.handleSubmit}>
-          <div className="campus-dropdown-button">
-            <ComboBoxView
-              group={props.campuses}
-              handleChange={props.handleChange}
-            />
-            <div className="btn-group"></div>
-          </div>
+          <Autocomplete
+            id="combobox"
+            options={props.campuses.filter(
+              (campus) => campus.id !== props.student.campusId_FK
+            )}
+            getOptionLabel={(option) => option.name}
+            style={{ width: 200 }}
+            size="small"
+            onChange={props.handleChange}
+            renderInput={(params) => (
+              <TextField {...params} label="Select Campus" variant="outlined" />
+            )}
+          />
           <Button
             className="campus-button"
             variant="contained"

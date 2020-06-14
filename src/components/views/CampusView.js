@@ -51,7 +51,7 @@ const CampusView = (props) => {
       </div>
       <div>
         <p className="campus-address">{props.campus.address}</p>
-        <div>
+        <div className="button-group">
           <Button
             variant="contained"
             color="primary"
