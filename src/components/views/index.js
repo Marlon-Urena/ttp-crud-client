@@ -7,3 +7,4 @@ export { default as AddCampusFormView } from "./AddCampusFormView";
 export { default as EditCampusFormView } from "./EditCampusFormView";
 export { default as AddStudentFormView } from "./AddStudentFormView";
 export { default as EditStudentFormView } from "./EditStudentFormView";
+export { default as ComboBoxView } from "./ComboBoxView";

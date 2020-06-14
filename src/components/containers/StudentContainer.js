@@ -1,11 +1,16 @@
 import React, { Component } from "react";
-import { deleteStudentThunk, fetchStudentThunk } from "../../thunks";
+import {
+  deleteStudentThunk,
+  fetchAllCampusesThunk,
+  fetchStudentThunk,
+} from "../../thunks";
 import { connect } from "react-redux";
 import { StudentView } from "../views";
 
 class StudentContainer extends Component {
   componentDidMount() {
     this.props.fetchStudent(this.props.match.params.id);
+    this.props.fetchAllCampuses();
   }
 
   handleDelete = (id) => {
@@ -13,10 +18,12 @@ class StudentContainer extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <StudentView
         handleDelete={this.handleDelete}
         student={this.props.student}
+        campuses={this.props.allCampuses}
       />
     );
   }
@@ -33,6 +40,7 @@ class StudentContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     student: state.student,
+    allCampuses: state.allCampuses,
   };
 };
 
@@ -45,6 +53,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetchStudent: (id) => dispatch(fetchStudentThunk(id)),
+    fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
     deleteStudent: (id) => dispatch(deleteStudentThunk(id, ownProps)),
   };
 };

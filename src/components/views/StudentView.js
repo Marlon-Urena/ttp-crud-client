@@ -1,5 +1,5 @@
 import React from "react";
-import ComboBox from "./ComboBox";
+import ComboBoxView from "./ComboBoxView";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 //TODO: Pass in GPA information
@@ -37,7 +37,7 @@ const StudentView = (props) => {
       </div>
       <div className="campus-section">
         <div className="campus-dropdown-button">
-          <ComboBox />
+          <ComboBoxView group={props.campuses} />
           <div className="btn-group"></div>
         </div>
         <Button className="campus-button" variant="contained" color="primary">

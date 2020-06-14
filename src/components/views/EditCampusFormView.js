@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
-import ComboBox from "./ComboBox";
+import ComboBoxView from "./ComboBoxView";
 import { Link } from "react-router-dom";
 
 //TODO: Connect removeStudentCampus action to remove button
@@ -94,7 +94,7 @@ const EditCampusFormView = (props) => {
       <div className="campus-students-section">
         <h1>Students on Campus</h1>
         <div className="student-options">
-          <ComboBox />
+          <ComboBoxView />
           <Button variant="contained" color="primary">
             Add to Campus
           </Button>
