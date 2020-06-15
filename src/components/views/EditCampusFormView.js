@@ -17,6 +17,7 @@ const EditCampusFormView = (props) => {
           className="student-row"
           key={student.id}
           student={student}
+          handleStudentEnrollment={props.handleStudentEnrollment}
         />
       );
     });
@@ -79,7 +80,10 @@ const EditCampusFormView = (props) => {
       </form>
       <div className="campus-students-section">
         <h1 className="campus-edit-heading">Students on Campus</h1>
-        <form onSubmit={props.handleEnrollStudent} className="student-options">
+        <form
+          onSubmit={() => props.handleStudentEnrollment("enrollment")}
+          className="student-options"
+        >
           <Autocomplete
             id="combobox"
             options={props.students.filter((student) => {
@@ -102,6 +106,7 @@ const EditCampusFormView = (props) => {
           <Button
             variant="contained"
             color="primary"
+            name="enrollment"
             className="add-student-button"
             type="submit"
           >

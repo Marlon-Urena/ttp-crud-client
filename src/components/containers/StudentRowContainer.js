@@ -3,7 +3,12 @@ import { StudentRowView } from "../views";
 
 class StudentRowContainer extends Component {
   render() {
-    return <StudentRowView student={this.props.student} />;
+    return (
+      <StudentRowView
+        handleStudentEnrollment={this.props.handleStudentEnrollment}
+        student={this.props.student}
+      />
+    );
   }
 }
 

@@ -8,7 +8,7 @@ const FETCH_ALL_STUDENTS = "FETCH_ALL_STUDENTS";
 const ADD_STUDENT = "ADD_STUDENT";
 const EDIT_STUDENT = "EDIT_STUDENT";
 const DELETE_STUDENT = "DELETE_STUDENT";
-const ENROLL_STUDENT = "ENROLL_STUDENT";
+const STUDENT_ENROLLMENT = "STUDENT_ENROLLMENT";
 
 /**
  * ACTION CREATORS
@@ -42,9 +42,9 @@ const deleteStudent = (id) => {
   };
 };
 
-const enrollStudent = (student) => {
+const studentEnrollment = (student) => {
   return {
-    type: ENROLL_STUDENT,
+    type: STUDENT_ENROLLMENT,
     payload: student,
   };
 };
@@ -95,11 +95,11 @@ export const deleteStudentThunk = (id, ownProps) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export const enrollStudentThunk = (id, student) => (dispatch) => {
+export const studentEnrollmentThunk = (id, student) => (dispatch) => {
   return axios
     .put(`/api/students/${id}`, student)
     .then((res) => res.data)
-    .then((enrolledStudent) => dispatch(enrollStudent(enrolledStudent)))
+    .then((student) => dispatch(studentEnrollment(student)))
     .catch((err) => console.log(err));
 };
 
@@ -118,7 +118,7 @@ const reducer = (state = [], action) => {
       return [...state, action.payload];
     case DELETE_STUDENT:
       return state.filter((student) => student.id !== action.payload);
-    case ENROLL_STUDENT:
+    case STUDENT_ENROLLMENT:
       return [...state, action.payload];
     default:
       return state;

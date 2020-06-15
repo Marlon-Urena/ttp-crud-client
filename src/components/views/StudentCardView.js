@@ -13,7 +13,6 @@ import { Link } from "react-router-dom";
 const StudentCardView = (props) => {
   const student = props.student;
   const campus = props.campus;
-  console.log(campus);
   return (
     <Grid key={student.id} item sm={3} md={6} xs={12}>
       <Card className="student-card">

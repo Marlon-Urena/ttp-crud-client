@@ -1,5 +1,11 @@
 import React from "react";
-import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@material-ui/core";
 import { Link } from "react-router-dom";
 import "./styles/StudentRowView.css";
 
@@ -24,6 +30,19 @@ const StudentRowView = (props) => {
             {props.student.gpa}
           </Typography>
         </CardContent>
+      </div>
+      <div className="unenroll-button-container">
+        <Button
+          variant="contained"
+          color="secondary"
+          className="unenroll-button"
+          name="unenrollment"
+          onClick={() =>
+            props.handleStudentEnrollment("unenrollment", props.student)
+          }
+        >
+          Unenroll
+        </Button>
       </div>
     </Card>
   );

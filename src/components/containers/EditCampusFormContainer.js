@@ -5,7 +5,7 @@ import {
   fetchCampusThunk,
   editCampusThunk,
   fetchAllStudentsThunk,
-  enrollStudentThunk,
+  studentEnrollmentThunk,
 } from "../../thunks";
 import { EditCampusFormView } from "../views";
 
@@ -20,7 +20,7 @@ class EditCampusFormContainer extends Component {
       student: {},
     };
     this.handleStudentChange = this.handleStudentChange.bind(this);
-    this.handleEnrollStudent = this.handleEnrollStudent.bind(this);
+    this.handleStudentEnrollment = this.handleStudentEnrollment.bind(this);
   }
 
   componentDidMount() {
@@ -47,9 +47,18 @@ class EditCampusFormContainer extends Component {
     this.setState({ student: { ...student, campusId_FK: id } });
   };
 
-  handleEnrollStudent = (e) => {
-    const id = this.state.student.id;
-    this.props.enrollStudent(id, this.state.student);
+  handleStudentEnrollment = (type, student) => {
+    if (type === "unenrollment") {
+      console.log(type);
+      const id = student.id;
+      const unenrolledStudent = { ...student, campusId_FK: null };
+      this.props
+        .studentEnrollment(id, unenrolledStudent)
+        .then(window.location.reload(true));
+    } else {
+      const id = this.state.student.id;
+      this.props.studentEnrollment(id, this.state.student);
+    }
   };
 
   render() {
@@ -63,7 +72,7 @@ class EditCampusFormContainer extends Component {
         imageUrl={this.state.imageUrl}
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
-        handleEnrollStudent={this.handleEnrollStudent}
+        handleStudentEnrollment={this.handleStudentEnrollment}
         handleStudentChange={this.handleStudentChange}
       />
     );
@@ -82,7 +91,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     fetchCampus: (id) => dispatch(fetchCampusThunk(id)),
     editCampus: (id, campus) => dispatch(editCampusThunk(id, campus, ownProps)),
     fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
-    enrollStudent: (id, student) => dispatch(enrollStudentThunk(id, student)),
+    studentEnrollment: (id, student) =>
+      dispatch(studentEnrollmentThunk(id, student)),
   };
 };
 
@@ -90,7 +100,7 @@ EditCampusFormContainer.propTypes = {
   fetchCampus: PropTypes.func.isRequired,
   editCampus: PropTypes.func.isRequired,
   fetchAllStudents: PropTypes.func.isRequired,
-  enrollStudent: PropTypes.func.isRequired,
+  studentEnrollment: PropTypes.func.isRequired,
 };
 
 export default connect(
