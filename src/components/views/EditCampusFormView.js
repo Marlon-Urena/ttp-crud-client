@@ -1,107 +1,122 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "@material-ui/core/Button";
-import ComboBoxView from "./ComboBoxView";
-import { Link } from "react-router-dom";
+import { Button, TextField } from "@material-ui/core";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import { StudentRowContainer } from "../containers";
+import "./styles/EditCampusFormView.css";
 
 //TODO: Connect removeStudentCampus action to remove button
 //TODO: Look into possibly getting a list of all students passed in here. Those that are on campus gets put into cards.
 //TODO: Link Add to campus button with the dropdown box
 
 const EditCampusFormView = (props) => {
-  console.log(props);
-  const students = () => {
-    if (!props.students.length) {
-      return <div>There are no students</div>;
-    } else {
+  const students = () =>
+    props.campus.students.map((student) => {
       return (
-        <div className="campus-students">
-          {props.students.map((student) => (
-            <div key={student.id} className="card mb-3 campus-card">
-              <div className="row no-gutters">
-                <div className="col-md-4">
-                  <img
-                    src="https://via.placeholder.com/150"
-                    className="card-img"
-                    alt="student"
-                  />
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body">
-                    <Link to={`/students/${student.id}`}>
-                      <h5 className="card-title">{student.firstName}</h5>
-                    </Link>
-                    <p className="card-text">GPA: </p>
-                    <div className="student-card-links">
-                      <button
-                        type="button"
-                        className="btn btn-danger"
-                        onClick={null}
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-          ;
-        </div>
+        <StudentRowContainer
+          className="student-row"
+          key={student.id}
+          student={student}
+        />
       );
-    }
-  };
-
+    });
   return (
-    <>
-      <form onSubmit={props.handleSubmit}>
-        <div>
-          Name:{" "}
-          <input
-            value={props.name}
-            name="name"
-            onChange={props.handleChange}
-          ></input>
+    <div className="root">
+      <form onSubmit={props.handleSubmit} className="campus-form">
+        <div className="campus-input-group">
+          <div className="input-field">
+            <TextField
+              id="name"
+              name="name"
+              label="Campus Name"
+              type="text"
+              variant="outlined"
+              fullWidth={true}
+              value={props.name}
+            />
+          </div>
+          <div className="input-field">
+            <TextField
+              id="address"
+              name="address"
+              label="Campus Location"
+              type="text"
+              variant="outlined"
+              fullWidth={true}
+              value={props.address}
+            />
+          </div>
+          <div className="input-field">
+            <TextField
+              id="imageUrl"
+              name="imageUrl"
+              label="Campus Image URL"
+              type="text"
+              variant="outlined"
+              fullWidth={true}
+              value={props.imageUrl}
+            />
+          </div>
+          <div className="input-field">
+            <TextField
+              id="description"
+              name="description"
+              label="Campus Description"
+              type="text"
+              multiline
+              rows={5}
+              variant="outlined"
+              fullWidth={true}
+              value={props.description}
+            />
+          </div>
         </div>
-        <div>
-          Address:{" "}
-          <input
-            value={props.address}
-            name="address"
-            onChange={props.handleChange}
-          ></input>
-        </div>
-        <div>
-          Description:{" "}
-          <input
-            value={props.description}
-            name="description"
-            onChange={props.handleChange}
-          ></input>
-        </div>
-        <div>
-          Image Url:{" "}
-          <input
-            value={props.imageUrl}
-            name="imageUrl"
-            onChange={props.handleChange}
-          ></input>
-        </div>
-        <Button type="submit" variant="contained" color="primary">
-          Save Changes
-        </Button>
-      </form>
-      <div className="campus-students-section">
-        <h1>Students on Campus</h1>
-        <div className="student-options">
-          <ComboBoxView />
-          <Button variant="contained" color="primary">
-            Add to Campus
+        <div className="save-button">
+          <Button type="submit" variant="contained" color="primary">
+            Save Changes
           </Button>
         </div>
-        {students()}
+      </form>
+      <div className="campus-students-section">
+        <h1 className="campus-edit-heading">Students on Campus</h1>
+        <form onSubmit={props.handleEnrollStudent} className="student-options">
+          <Autocomplete
+            id="combobox"
+            options={props.students.filter((student) => {
+              return student.campusId_FK !== props.campus.id;
+            })}
+            getOptionLabel={(option) =>
+              option.firstName + " " + option.lastName
+            }
+            style={{ width: 200 }}
+            size="small"
+            onChange={props.handleStudentChange}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Select Student"
+                variant="outlined"
+              />
+            )}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            className="add-student-button"
+            type="submit"
+          >
+            Add to Campus
+          </Button>
+        </form>
+        {props.campus.students.length ? (
+          students()
+        ) : (
+          <h3 className="campus-edit-heading">
+            There are no students registered to this campus.
+          </h3>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 

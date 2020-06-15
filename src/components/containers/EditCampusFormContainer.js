@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchCampusThunk, editCampusThunk } from "../../thunks";
+import {
+  fetchCampusThunk,
+  editCampusThunk,
+  fetchAllStudentsThunk,
+  enrollStudentThunk,
+} from "../../thunks";
 import { EditCampusFormView } from "../views";
 
 class EditCampusFormContainer extends Component {
@@ -12,14 +17,17 @@ class EditCampusFormContainer extends Component {
       address: "",
       description: "",
       imageUrl: "",
+      student: {},
     };
+    this.handleStudentChange = this.handleStudentChange.bind(this);
+    this.handleEnrollStudent = this.handleEnrollStudent.bind(this);
   }
 
   componentDidMount() {
-    console.log(this.props.match);
     this.props.fetchCampus(this.props.match.params.id).then(({ payload }) => {
       this.setState(payload);
     });
+    this.props.fetchAllStudents();
   }
 
   handleChange = (e) => {
@@ -34,16 +42,29 @@ class EditCampusFormContainer extends Component {
     this.props.editCampus(id, this.state);
   };
 
+  handleStudentChange = (e, student) => {
+    const id = this.props.match.params.id;
+    this.setState({ student: { ...student, campusId_FK: id } });
+  };
+
+  handleEnrollStudent = (e) => {
+    const id = this.state.student.id;
+    this.props.enrollStudent(id, this.state.student);
+  };
+
   render() {
     return (
       <EditCampusFormView
         name={this.state.name}
         address={this.state.address}
         description={this.state.description}
-        students={this.props.campus.students}
+        students={this.props.allStudents}
+        campus={this.props.campus}
         imageUrl={this.state.imageUrl}
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
+        handleEnrollStudent={this.handleEnrollStudent}
+        handleStudentChange={this.handleStudentChange}
       />
     );
   }
@@ -52,6 +73,7 @@ class EditCampusFormContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     campus: state.campus,
+    allStudents: state.allStudents,
   };
 };
 
@@ -59,12 +81,16 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetchCampus: (id) => dispatch(fetchCampusThunk(id)),
     editCampus: (id, campus) => dispatch(editCampusThunk(id, campus, ownProps)),
+    fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
+    enrollStudent: (id, student) => dispatch(enrollStudentThunk(id, student)),
   };
 };
 
 EditCampusFormContainer.propTypes = {
   fetchCampus: PropTypes.func.isRequired,
   editCampus: PropTypes.func.isRequired,
+  fetchAllStudents: PropTypes.func.isRequired,
+  enrollStudent: PropTypes.func.isRequired,
 };
 
 export default connect(
