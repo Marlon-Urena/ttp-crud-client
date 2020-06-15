@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import "./styles/StudentRowView.css";
 
 const StudentRowView = (props) => {
@@ -12,7 +13,11 @@ const StudentRowView = (props) => {
       />
       <div className="student-details">
         <CardContent className="student-info">
-          <Typography component="h5" variant="h5">
+          <Typography
+            variant="h5"
+            component={Link}
+            to={`/students/${props.student.id}`}
+          >
             {props.student.firstName + " " + props.student.lastName}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
