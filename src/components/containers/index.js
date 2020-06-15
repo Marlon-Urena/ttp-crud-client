@@ -9,3 +9,4 @@ export { default as AddStudentFormContainer } from "./AddStudentFormContainer";
 export { default as EditStudentFormContainer } from "./EditStudentFormContainer";
 export { default as StudentCardContainer } from "./StudentCardContainer";
 export { default as StudentRowContainer } from "./StudentRowContainer";
+export { default as CampusCardContainer } from "./CampusCardContainer";
