@@ -58,28 +58,37 @@ export const fetchAllCampusesThunk = () => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export const addCampusThunk = (campus) => (dispatch) => {
+export const addCampusThunk = (campus, ownProps) => (dispatch) => {
   return axios
     .post("/api/campuses", campus)
     .then((res) => res.data)
-    .then((newCampus) => dispatch(addCampus(newCampus)))
+    .then((newCampus) => {
+      dispatch(addCampus(newCampus));
+      ownProps.history.push(`/campuses/${newCampus.id}`);
+    })
     .catch((err) => console.log(err));
 };
 
-export const editCampusThunk = (id, campus) => (dispatch) => {
-  console.log("edit thunk ran");
+export const editCampusThunk = (id, campus, ownProps) => (dispatch) => {
   return axios
     .put(`/api/campuses/${id}`, campus)
     .then((res) => res.data)
-    .then((updatedCampus) => dispatch(editCampus(updatedCampus)))
+    .then((updatedCampus) => {
+      dispatch(editCampus(updatedCampus));
+      ownProps.history.push(`/campuses/${updatedCampus.id}`);
+    })
     .catch((err) => console.log(err));
 };
 
-export const deleteCampusThunk = (id) => (dispatch) => {
+export const deleteCampusThunk = (id, ownProps) => (dispatch) => {
   return axios
     .delete(`/api/campuses/${id}`)
     .then((res) => res.data)
-    .then(() => dispatch(deleteCampus(id)))
+    .then(() => {
+      dispatch(deleteCampus(id));
+      ownProps.history.push(`/campuses`);
+      console.log("Pushing history");
+    })
     .catch((err) => console.log(err));
 };
 
@@ -101,7 +110,6 @@ const reducer = (state = [], action) => {
     case EDIT_CAMPUS:
       return [...state, action.payload];
     case DELETE_CAMPUS:
-      console.log(action.payload);
       return state.filter((campus) => campus.id !== action.payload);
     case FETCH_CAMPUS_STUDENTS:
       return action.payload;

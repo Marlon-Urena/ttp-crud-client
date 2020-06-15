@@ -2,17 +2,17 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 //TODO: Pass in campuses props.
-//TODO: May remove Change Campus button
-const ComboBox = (props) => {
+const ComboBoxView = (props) => {
   return (
     <Autocomplete
-      id="campus-combobox"
-      options={allCampuses}
+      id="combobox"
+      options={props.group}
       getOptionLabel={(option) => option.name}
       style={{ width: 200 }}
       size="small"
+      onChange={props.handleChange}
       renderInput={(params) => (
-        <TextField {...params} label="Select Campus" variant="outlined" />
+        <TextField {...params} label="Select" variant="outlined" />
       )}
     />
   );
@@ -81,4 +81,4 @@ const allCampuses = [
       "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
 ];
-export default ComboBox;
+export default ComboBoxView;

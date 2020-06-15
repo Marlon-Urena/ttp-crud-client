@@ -1,38 +1,44 @@
+import axios from "axios";
+
 /**
  * ACTION TYPE
  * Purpose: Gets used by the reducer to run a payload
  */
-const FETCH_ALL_STUDENTS = 'FETCH_ALL_STUDENTS';
-
-/**
-* DUMMY DATA
-* Purpose: Used for mocking thunk
-*/
-const allStudents = [
-    {
-        id: "2223334444",
-        name: 'John Doe',
-        email: 'john@example.com',
-        imageURL: 'https://via.placeholder.com/150',
-    },
-    {
-        id: "1111111111",
-        name: 'Jane Doe',
-        email: 'jane@example.com',
-        imageURL: 'https://via.placeholder.com/150',
-    },
-];
-
+const FETCH_ALL_STUDENTS = "FETCH_ALL_STUDENTS";
+const ADD_STUDENT = "ADD_STUDENT";
+const EDIT_STUDENT = "EDIT_STUDENT";
+const DELETE_STUDENT = "DELETE_STUDENT";
 
 /**
  * ACTION CREATORS
  * Purpose: Functions that send an action to the reducer.
  */
 const fetchAllStudents = (students) => {
-    return {
-        type: FETCH_ALL_STUDENTS,
-        payload: students,
-    };
+  return {
+    type: FETCH_ALL_STUDENTS,
+    payload: students,
+  };
+};
+
+const addStudent = (student) => {
+  return {
+    type: ADD_STUDENT,
+    payload: student,
+  };
+};
+
+const editStudent = (student) => {
+  return {
+    type: EDIT_STUDENT,
+    payload: student,
+  };
+};
+
+const deleteStudent = (id) => {
+  return {
+    type: DELETE_STUDENT,
+    payload: id,
+  };
 };
 
 /**
@@ -41,7 +47,44 @@ const fetchAllStudents = (students) => {
  * Called in AllStudentsContainer and passed into dispatch
  */
 export const fetchAllStudentsThunk = () => (dispatch) => {
-    return dispatch(fetchAllStudents(allStudents));
+  return axios
+    .get(`/api/students/`)
+    .then((res) => res.data)
+    .then((students) => dispatch(fetchAllStudents(students)))
+    .catch((err) => console.log(err));
+};
+
+export const addStudentThunk = (student, ownProps) => (dispatch) => {
+  return axios
+    .post(`/api/students/`, student)
+    .then((res) => res.data)
+    .then((newStudent) => {
+      dispatch(addStudent(newStudent));
+      ownProps.history.push(`/students/${newStudent.id}`);
+    })
+    .catch((err) => console.log(err));
+};
+
+export const editStudentThunk = (id, student, ownProps) => (dispatch) => {
+  return axios
+    .put(`/api/students/${id}`, student)
+    .then((res) => res.data)
+    .then((updatedStudent) => {
+      dispatch(editStudent(updatedStudent));
+      ownProps.history.push(`/students/${updatedStudent.id}`);
+    })
+    .catch((err) => console.log(err));
+};
+
+export const deleteStudentThunk = (id, ownProps) => (dispatch) => {
+  return axios
+    .delete(`/api/students/${id}`)
+    .then((res) => res.data)
+    .then(() => {
+      dispatch(deleteStudent(id));
+      ownProps.history.push(`/students`);
+    })
+    .catch((err) => console.log(err));
 };
 
 /**
@@ -50,12 +93,18 @@ export const fetchAllStudentsThunk = () => (dispatch) => {
  * Extra Info: Used by the store in store/index.js
  */
 const reducer = (state = [], action) => {
-    switch (action.type) {
-        case FETCH_ALL_STUDENTS:
-            return action.payload;
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case FETCH_ALL_STUDENTS:
+      return action.payload;
+    case ADD_STUDENT:
+      return [...state, action.payload];
+    case EDIT_STUDENT:
+      return [...state, action.payload];
+    case DELETE_STUDENT:
+      return state.filter((student) => student.id !== action.payload);
+    default:
+      return state;
+  }
 };
 
 export default reducer;

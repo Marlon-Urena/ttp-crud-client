@@ -1,34 +1,91 @@
 import React from "react";
-import ComboBox from "./ComboBox";
+import ComboBoxView from "./ComboBoxView";
+import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
 //TODO: Pass in GPA information
 const StudentView = (props) => {
+  const campus = () => {
+    const currentCampus = props.student.campus;
+    if (!currentCampus) {
+      console.log(currentCampus);
+      return <div>This student is not registered to a campus.</div>;
+    } else {
+      return (
+        <div className="campuses">
+          <div key={currentCampus.id} className="card mb-3 campus-card">
+            <div className="row no-gutters">
+              <div className="col-md-4">
+                <img
+                  src={currentCampus.imageUrl}
+                  className="card-img"
+                  alt="campus"
+                />
+              </div>
+              <div className="col-md-8">
+                <div className="card-body">
+                  <Link to={`/campuses/${currentCampus.id}`}>
+                    <h5 className="card-title">{currentCampus.name}</h5>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+          ;
+        </div>
+      );
+    }
+  };
   return (
     <>
       <div className="student-heading">
         <div className="student-img">
-          <img src={props.student.imageURL} alt="student" />
+          <img src={props.student.imageUrl} alt="student" />
         </div>
         <div className="student-information">
-          <h1 className="student-name">{props.student.name}</h1>
+          <h1 className="student-name">
+            {props.student.firstName + " " + props.student.lastName}
+          </h1>
           <p className="student-description">{props.student.email}</p>
-          <p className="student-gpa">GPA: </p>
+          <p className="student-gpa">GPA: {props.student.gpa}</p>
         </div>
         <div className="alter-button">
-          <button type="button" className="btn btn-success">
+          <Button
+            component={Link}
+            to={`/students/${props.student.id}/edit`}
+            variant="contained"
+            color="primary"
+          >
             Edit
-          </button>
-          <button type="button" className="btn btn-danger">
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => props.handleDelete(props.student.id)}
+          >
             Delete
-          </button>
+          </Button>
         </div>
       </div>
       <div className="campus-section">
-        <div className="campus-dropdown-button">
-          <ComboBox />
-          <div className="btn-group"></div>
-        </div>
-        <button className="campus-button btn btn-primary">Change Campus</button>
+        <form onSubmit={props.handleSubmit}>
+          <div className="campus-dropdown-button">
+            <ComboBoxView
+              group={props.campuses}
+              handleChange={props.handleChange}
+            />
+            <div className="btn-group"></div>
+          </div>
+          <Button
+            className="campus-button"
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            Change Campus
+          </Button>
+        </form>
       </div>
+      {campus()}
     </>
   );
 };

@@ -6,7 +6,21 @@ import Button from "@material-ui/core/Button";
 
 const AllCampusesView = (props) => {
   if (!props.allCampuses.length) {
-    return <div className="all-campuses">There are no campuses</div>;
+    return (
+      <>
+        <div className="jumbotron jumbotron-fluid">
+          <div className="container">
+            <h1 className="display-4">All Campuses</h1>
+            <Link to="/campuses/new">
+              <Button variant="contained" color="primary">
+                Add Campus
+              </Button>
+            </Link>
+          </div>
+        </div>
+        <div className="all-campuses">There are no campuses</div>
+      </>
+    );
   }
 
   return (
