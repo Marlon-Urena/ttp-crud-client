@@ -14,7 +14,15 @@ class AllStudentsContainer extends Component {
   }
 
   render() {
-    return <AllStudentsView allStudents={this.props.allStudents} />;
+    return (
+      <AllStudentsView
+        allStudents={this.props.allStudents}
+        banner={"All Students"}
+        link={`/students/add`}
+        linkMessage={"Add Student"}
+        toggle={false}
+      />
+    );
   }
 }
 

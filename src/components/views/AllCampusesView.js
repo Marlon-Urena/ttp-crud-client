@@ -1,9 +1,8 @@
 import React from "react";
 import "./styles/AllCampusesView.css";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { Button, Grid } from "@material-ui/core";
-import { CampusCardContainer } from "../containers";
+import { Grid } from "@material-ui/core";
+import { CampusCardContainer, JumbotronContainer } from "../containers";
 
 const AllCampusesView = (props) => {
   const campuses = () =>
@@ -16,16 +15,12 @@ const AllCampusesView = (props) => {
     ));
   return (
     <>
-      <div className="jumbotron jumbotron-fluid">
-        <div className="container">
-          <h1 className="display-4">All Campuses</h1>
-          <Link to="/campuses/new">
-            <Button variant="contained" color="primary">
-              Add Campus
-            </Button>
-          </Link>
-        </div>
-      </div>
+      <JumbotronContainer
+        banner={props.banner}
+        link={props.link}
+        linkMessage={props.linkMessage}
+        toggle={props.toggle}
+      />
       <Grid container justify="flex-start" className="all-campuses">
         {props.allCampuses.length ? (
           campuses()
