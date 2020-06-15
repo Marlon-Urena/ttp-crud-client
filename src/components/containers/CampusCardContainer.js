@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { CampusCardView } from "../views";
 
 class CampusCardContainer extends Component {
@@ -12,4 +13,7 @@ class CampusCardContainer extends Component {
   }
 }
 
+CampusCardContainer.propTypes = {
+  campus: PropTypes.object.isRequired,
+};
 export default CampusCardContainer;

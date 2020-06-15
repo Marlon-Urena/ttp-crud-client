@@ -1,42 +1,44 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
+import { Button, TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { JumbotronContainer } from "../containers";
+import { CampusCardContainer, JumbotronContainer } from "../containers";
 
 const StudentView = (props) => {
-  const campus = () => {
-    const currentCampus = props.student.campus;
-    if (!currentCampus) {
-      console.log(currentCampus);
-      return <div>This student is not registered to a campus.</div>;
-    } else {
-      return (
-        <div className="campuses">
-          <div key={currentCampus.id} className="card mb-3 campus-card">
-            <div className="row no-gutters">
-              <div className="col-md-4">
-                <img
-                  src={currentCampus.imageUrl}
-                  className="card-img"
-                  alt="campus"
-                />
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-                  <Link to={`/campuses/${currentCampus.id}`}>
-                    <h5 className="card-title">{currentCampus.name}</h5>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-          ;
-        </div>
-      );
-    }
-  };
+  const enrolledCampus = props.campuses.filter((campus) => {
+    return campus.id === props.student.campusId_FK;
+  });
+
+  // const campus = () => {
+  //   const currentCampus = props.student.campus;
+  //   if (!currentCampus) {
+  //     return <div>This student is not registered to a campus.</div>;
+  //   } else {
+  //     return (
+  //       <div className="campuses">
+  //         <div key={currentCampus.id} className="card mb-3 campus-card">
+  //           <div className="row no-gutters">
+  //             <div className="col-md-4">
+  //               <img
+  //                 src={currentCampus.imageUrl}
+  //                 className="card-img"
+  //                 alt="campus"
+  //               />
+  //             </div>
+  //             <div className="col-md-8">
+  //               <div className="card-body">
+  //                 <Link to={`/campuses/${currentCampus.id}`}>
+  //                   <h5 className="card-title">{currentCampus.name}</h5>
+  //                 </Link>
+  //               </div>
+  //             </div>
+  //           </div>
+  //         </div>
+  //         ;
+  //       </div>
+  //     );
+  //   }
+  // };
   return (
     <>
       <JumbotronContainer banner={props.banner} toggle={props.toggle} />
@@ -94,7 +96,14 @@ const StudentView = (props) => {
           </Button>
         </form>
       </div>
-      {campus()}
+      {enrolledCampus ? (
+        <CampusCardContainer
+          campus={enrolledCampus[0]}
+          handleDelete={props.handleDelete}
+        />
+      ) : (
+        <div>This student is not registered to a campus.</div>
+      )}
     </>
   );
 };
