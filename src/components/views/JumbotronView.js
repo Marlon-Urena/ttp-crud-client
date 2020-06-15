@@ -7,7 +7,7 @@ const JumbotronView = (props) => {
     <div className="jumbotron jumbotron-fluid">
       <div className="container">
         <h1 className="display-4">{props.banner}</h1>
-        {props.isToggle ? (
+        {props.toggle ? (
           <></>
         ) : (
           <Link to={props.link}>

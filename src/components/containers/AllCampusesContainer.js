@@ -22,7 +22,7 @@ class AllCampusesContainer extends Component {
           allCampuses={this.props.allCampuses}
           handleDelete={this.handleDelete}
           banner={"All Campuses"}
-          link={`/campuses/add`}
+          link={`/campuses/new`}
           linkMessage={"Add Campus"}
           toggle={false}
         />

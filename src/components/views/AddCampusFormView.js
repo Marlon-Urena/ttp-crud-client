@@ -1,9 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { JumbotronContainer } from "../containers";
 
 const AddCampusFormView = (props) => {
   return (
     <div>
+      <JumbotronContainer banner={props.banner} toggle={props.toggle} />
+
       <form onSubmit={props.handleSubmit}>
         <div>
           Name:{" "}

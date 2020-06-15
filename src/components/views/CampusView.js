@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Grid } from "@material-ui/core";
 import "./styles/CampusView.css";
 import { Link } from "react-router-dom";
-import { StudentCardContainer } from "../containers";
+import { JumbotronContainer, StudentCardContainer } from "../containers";
 
 const CampusView = (props) => {
   const students = () =>
@@ -17,6 +17,7 @@ const CampusView = (props) => {
     });
   return (
     <>
+      <JumbotronContainer banner={props.banner} toggle={props.toggle} />
       <div className="campus-heading">
         <div className="campus-img">
           <img src={props.campus.imageUrl} alt="campus" />

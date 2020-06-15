@@ -1,8 +1,11 @@
 import React from "react";
 import { TextField, Button } from "@material-ui/core";
+import { JumbotronContainer } from "../containers";
 const AddStudentFormView = (props) => {
   return (
     <>
+      <JumbotronContainer banner={props.banner} toggle={props.toggle} />
+
       <form onSubmit={props.handleSubmit}>
         <div>
           <TextField

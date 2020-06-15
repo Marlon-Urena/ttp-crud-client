@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { TextField, Button } from "@material-ui/core";
+import { JumbotronContainer } from "../containers";
 
 //TODO: Connect removeStudentCampus action to remove button
 //TODO: Look into possibly getting a list of all students passed in here. Those that are on campus gets put into cards.
@@ -9,6 +10,7 @@ import { TextField, Button } from "@material-ui/core";
 const EditStudentFormView = (props) => {
   return (
     <>
+      <JumbotronContainer banner={props.banner} toggle={props.toggle} />
       <form onSubmit={props.handleSubmit}>
         <div>
           <TextField

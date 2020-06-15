@@ -49,6 +49,8 @@ class StudentContainer extends Component {
         handleSubmit={this.handleSubmit}
         student={this.props.student}
         campuses={this.props.allCampuses}
+        banner={"Show Student"}
+        toggle={true}
       />
     );
   }

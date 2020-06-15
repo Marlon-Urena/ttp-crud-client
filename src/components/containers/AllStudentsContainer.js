@@ -18,7 +18,7 @@ class AllStudentsContainer extends Component {
       <AllStudentsView
         allStudents={this.props.allStudents}
         banner={"All Students"}
-        link={`/students/add`}
+        link={`/students/new`}
         linkMessage={"Add Student"}
         toggle={false}
       />

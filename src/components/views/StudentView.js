@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import { JumbotronContainer } from "../containers";
 
 const StudentView = (props) => {
   const campus = () => {
@@ -38,6 +39,7 @@ const StudentView = (props) => {
   };
   return (
     <>
+      <JumbotronContainer banner={props.banner} toggle={props.toggle} />
       <div className="student-heading">
         <div className="student-img">
           <img src={props.student.imageUrl} alt="student" />

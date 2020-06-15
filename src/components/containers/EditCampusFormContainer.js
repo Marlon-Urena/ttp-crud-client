@@ -74,6 +74,8 @@ class EditCampusFormContainer extends Component {
         handleChange={this.handleChange}
         handleStudentEnrollment={this.handleStudentEnrollment}
         handleStudentChange={this.handleStudentChange}
+        banner={"Edit Campus"}
+        toggle={true}
       />
     );
   }
