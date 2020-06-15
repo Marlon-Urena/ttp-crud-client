@@ -9,3 +9,4 @@ export { default as AddStudentFormView } from "./AddStudentFormView";
 export { default as EditStudentFormView } from "./EditStudentFormView";
 export { default as ComboBoxView } from "./ComboBoxView";
 export { default as StudentCardView } from "./StudentCardView";
+export { default as StudentRowView } from "./StudentRowView";

@@ -1,0 +1,16 @@
+.student-image {
+    width: 151px;
+}
+
+.student-row {
+    display: flex;
+}
+
+.student-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.student-info {
+    flex: 1 0 auto;
+}
