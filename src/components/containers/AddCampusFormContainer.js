@@ -25,6 +25,7 @@ class AddCampusFormContainer extends Component {
     e.preventDefault();
     this.props.addCampus(this.state);
   };
+
   render() {
     return (
       <AddCampusFormView
@@ -34,6 +35,8 @@ class AddCampusFormContainer extends Component {
         imageUrl={this.state.imageUrl}
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
+        banner={"Add Campus"}
+        toggle={true}
       />
     );
   }

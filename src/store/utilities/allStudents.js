@@ -8,6 +8,7 @@ const FETCH_ALL_STUDENTS = "FETCH_ALL_STUDENTS";
 const ADD_STUDENT = "ADD_STUDENT";
 const EDIT_STUDENT = "EDIT_STUDENT";
 const DELETE_STUDENT = "DELETE_STUDENT";
+const STUDENT_ENROLLMENT = "STUDENT_ENROLLMENT";
 
 /**
  * ACTION CREATORS
@@ -38,6 +39,13 @@ const deleteStudent = (id) => {
   return {
     type: DELETE_STUDENT,
     payload: id,
+  };
+};
+
+const studentEnrollment = (student) => {
+  return {
+    type: STUDENT_ENROLLMENT,
+    payload: student,
   };
 };
 
@@ -87,6 +95,14 @@ export const deleteStudentThunk = (id, ownProps) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
+export const studentEnrollmentThunk = (id, student) => (dispatch) => {
+  return axios
+    .put(`/api/students/${id}`, student)
+    .then((res) => res.data)
+    .then((student) => dispatch(studentEnrollment(student)))
+    .catch((err) => console.log(err));
+};
+
 /**
  * REDUCER
  * Purpose: Take the action and matches with appropriate type and returns.
@@ -102,6 +118,8 @@ const reducer = (state = [], action) => {
       return [...state, action.payload];
     case DELETE_STUDENT:
       return state.filter((student) => student.id !== action.payload);
+    case STUDENT_ENROLLMENT:
+      return [...state, action.payload];
     default:
       return state;
   }

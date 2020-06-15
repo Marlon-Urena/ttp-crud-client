@@ -7,3 +7,7 @@ export { default as AddCampusFormContainer } from "./AddCampusFormContainer";
 export { default as EditCampusFormContainer } from "./EditCampusFormContainer";
 export { default as AddStudentFormContainer } from "./AddStudentFormContainer";
 export { default as EditStudentFormContainer } from "./EditStudentFormContainer";
+export { default as StudentCardContainer } from "./StudentCardContainer";
+export { default as StudentRowContainer } from "./StudentRowContainer";
+export { default as CampusCardContainer } from "./CampusCardContainer";
+export { default as JumbotronContainer } from "./JumbotronContainer";

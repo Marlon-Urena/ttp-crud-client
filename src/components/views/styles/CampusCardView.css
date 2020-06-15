@@ -1,0 +1,30 @@
+
+.campus-card-grid {
+    width: 400px;
+}
+
+.campus-image-container {
+    width: 150px;
+}
+.campus-image {
+    height: 100%;
+    max-width: 100%;
+    object-fit: fill;
+}
+.campus-card {
+    display: flex;
+    height: 150px;
+    margin: 10px;
+
+}
+
+.campus-interaction {
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+}
+.campus-card-btn-group {
+    display: flex;
+    flex-direction: row;
+    justify-self: flex-end;
+}

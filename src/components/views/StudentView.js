@@ -1,42 +1,47 @@
 import React from "react";
-import ComboBoxView from "./ComboBoxView";
 import { Link } from "react-router-dom";
-import { Button } from "@material-ui/core";
-//TODO: Pass in GPA information
+import { Button, TextField } from "@material-ui/core";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import { CampusCardContainer, JumbotronContainer } from "../containers";
+
 const StudentView = (props) => {
-  const campus = () => {
-    const currentCampus = props.student.campus;
-    if (!currentCampus) {
-      console.log(currentCampus);
-      return <div>This student is not registered to a campus.</div>;
-    } else {
-      return (
-        <div className="campuses">
-          <div key={currentCampus.id} className="card mb-3 campus-card">
-            <div className="row no-gutters">
-              <div className="col-md-4">
-                <img
-                  src={currentCampus.imageUrl}
-                  className="card-img"
-                  alt="campus"
-                />
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-                  <Link to={`/campuses/${currentCampus.id}`}>
-                    <h5 className="card-title">{currentCampus.name}</h5>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-          ;
-        </div>
-      );
-    }
-  };
+  const enrolledCampus = props.campuses.filter((campus) => {
+    return campus.id === props.student.campusId_FK;
+  });
+
+  // const campus = () => {
+  //   const currentCampus = props.student.campus;
+  //   if (!currentCampus) {
+  //     return <div>This student is not registered to a campus.</div>;
+  //   } else {
+  //     return (
+  //       <div className="campuses">
+  //         <div key={currentCampus.id} className="card mb-3 campus-card">
+  //           <div className="row no-gutters">
+  //             <div className="col-md-4">
+  //               <img
+  //                 src={currentCampus.imageUrl}
+  //                 className="card-img"
+  //                 alt="campus"
+  //               />
+  //             </div>
+  //             <div className="col-md-8">
+  //               <div className="card-body">
+  //                 <Link to={`/campuses/${currentCampus.id}`}>
+  //                   <h5 className="card-title">{currentCampus.name}</h5>
+  //                 </Link>
+  //               </div>
+  //             </div>
+  //           </div>
+  //         </div>
+  //         ;
+  //       </div>
+  //     );
+  //   }
+  // };
   return (
     <>
+      <JumbotronContainer banner={props.banner} toggle={props.toggle} />
       <div className="student-heading">
         <div className="student-img">
           <img src={props.student.imageUrl} alt="student" />
@@ -68,13 +73,19 @@ const StudentView = (props) => {
       </div>
       <div className="campus-section">
         <form onSubmit={props.handleSubmit}>
-          <div className="campus-dropdown-button">
-            <ComboBoxView
-              group={props.campuses}
-              handleChange={props.handleChange}
-            />
-            <div className="btn-group"></div>
-          </div>
+          <Autocomplete
+            id="combobox"
+            options={props.campuses.filter(
+              (campus) => campus.id !== props.student.campusId_FK
+            )}
+            getOptionLabel={(option) => option.name}
+            style={{ width: 200 }}
+            size="small"
+            onChange={props.handleChange}
+            renderInput={(params) => (
+              <TextField {...params} label="Select Campus" variant="outlined" />
+            )}
+          />
           <Button
             className="campus-button"
             variant="contained"
@@ -85,7 +96,14 @@ const StudentView = (props) => {
           </Button>
         </form>
       </div>
-      {campus()}
+      {enrolledCampus ? (
+        <CampusCardContainer
+          campus={enrolledCampus[0]}
+          handleDelete={props.handleDelete}
+        />
+      ) : (
+        <div>This student is not registered to a campus.</div>
+      )}
     </>
   );
 };

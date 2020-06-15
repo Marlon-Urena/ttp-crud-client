@@ -25,7 +25,6 @@ class StudentContainer extends Component {
   }
 
   handleChange = (e, campus) => {
-    console.log(campus);
     this.setState((prevState) => ({
       student: { ...prevState.student, campusId_FK: parseInt(campus.id, 10) },
     }));
@@ -50,6 +49,8 @@ class StudentContainer extends Component {
         handleSubmit={this.handleSubmit}
         student={this.props.student}
         campuses={this.props.allCampuses}
+        banner={"Show Student"}
+        toggle={true}
       />
     );
   }

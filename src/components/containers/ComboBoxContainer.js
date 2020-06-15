@@ -5,11 +5,6 @@ import { fetchAllCampusesThunk, fetchAllStudentsThunk } from "../../thunks";
 import { ComboBoxView } from "../views";
 
 class ComboBoxContainer extends Component {
-  // componentDidMount() {
-  //   this.props.fetchAllStudents();
-  //   this.props.fetchAllCampuses();
-  // }
-
   render() {
     return (
       <ComboBoxView
@@ -19,23 +14,5 @@ class ComboBoxContainer extends Component {
     );
   }
 }
-// const mapStateToProps = (state) => {
-//   return {
-//     allStudents: state.allStudents,
-//     allCampuses: state.allCampuses,
-//   };
-// };
-//
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//   return {
-//     fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
-//     fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
-//   };
-// };
-//
-// ComboBoxContainer.propTypes = {
-//   fetchAllCampuses: PropTypes.func.isRequired,
-//   fetchAllStudents: PropTypes.func.isRequired,
-// };
 
 export default ComboBoxContainer;

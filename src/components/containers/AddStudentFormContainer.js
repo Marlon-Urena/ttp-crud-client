@@ -31,6 +31,8 @@ class AddStudentFormContainer extends Component {
         {...this.state}
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
+        banner={"Add Student"}
+        toggle={true}
       />
     );
   }

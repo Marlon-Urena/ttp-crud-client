@@ -21,6 +21,10 @@ class AllCampusesContainer extends Component {
         <AllCampusesView
           allCampuses={this.props.allCampuses}
           handleDelete={this.handleDelete}
+          banner={"All Campuses"}
+          link={`/campuses/new`}
+          linkMessage={"Add Campus"}
+          toggle={false}
         />
       </>
     );
