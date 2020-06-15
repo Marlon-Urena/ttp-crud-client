@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "@material-ui/core/Button";
-import { TextField } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 
 //TODO: Connect removeStudentCampus action to remove button
 //TODO: Look into possibly getting a list of all students passed in here. Those that are on campus gets put into cards.
